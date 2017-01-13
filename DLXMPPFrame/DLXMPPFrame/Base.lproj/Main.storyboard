@@ -97,7 +97,9 @@
                             <outlet property="delegate" destination="eRH-1Z-Ccy" id="I05-nq-2hv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="00i-g4-zSV"/>
+                    <navigationItem key="navigationItem" title="Title" id="y61-Zg-ybY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="KaQ-q7-N4R"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="24x-V8-jIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -113,7 +115,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="eRH-1Z-Ccy" kind="relationship" relationship="rootViewController" id="gAm-qi-sin"/>
+                        <segue destination="eRH-1Z-Ccy" kind="relationship" relationship="rootViewController" id="ouI-VG-pxn"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEH-Vs-kkU" userLabel="First Responder" sceneMemberID="firstResponder"/>

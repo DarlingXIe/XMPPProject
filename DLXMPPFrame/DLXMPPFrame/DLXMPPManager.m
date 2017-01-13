@@ -13,13 +13,15 @@
 
 static DLXMPPManager * _instance;
 
-@interface DLXMPPManager()<XMPPStreamDelegate>
+@interface DLXMPPManager()<XMPPStreamDelegate,XMPPPingDelegate>
 
 @property (nonatomic, strong) XMPPStream *xmppStream;
 
 @property (nonatomic, getter=isRegisterCount) BOOL registerCount;
 
 @property (nonatomic, copy) NSString * password;
+
+@property (nonatomic, strong) XMPPAutoPing * autoPing;
 
 @end
 
@@ -30,9 +32,24 @@ static DLXMPPManager * _instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [self new];
+        [_instance testPingPong];
     });
     return _instance;
 }
+
+#pragma mark- pingAndPongTest
+-(void)testPingPong{
+    
+    self.autoPing.pingInterval = 3;
+    
+    self.autoPing.pingTimeout = 10;
+    
+    self.autoPing.respondsToQueries = true;
+    
+    [self.autoPing activate:self.xmppStream];
+    
+}
+
 #pragma mark-1.login
 -(void)loginWithJID:(XMPPJID *)jid password:(NSString *)password{
     
@@ -84,12 +101,36 @@ static DLXMPPManager * _instance;
     NSLog(@"错误信息--%@", error);
 }
 
+#pragma mark- pingpangdelegate
+//发送ping
+- (void)xmppAutoPingDidSendPing:(XMPPAutoPing *)sender
+{
+    NSLog(@"发送ping");
+}
+//接收pong
+- (void)xmppAutoPingDidReceivePong:(XMPPAutoPing *)sender
+{
+    NSLog(@"接收pong");
+}
+
+- (void)xmppAutoPingDidTimeout:(XMPPAutoPing *)sender
+{
+    
+}
 -(XMPPStream *)xmppStream{
     if(!_xmppStream){
         _xmppStream = [XMPPStream new];
         [_xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     }
     return _xmppStream;
+}
+
+-(XMPPAutoPing *)autoPing{
+    if(!_autoPing){
+        _autoPing = [[XMPPAutoPing alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+        [_autoPing addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    }
+    return _autoPing;
 }
 
 @end

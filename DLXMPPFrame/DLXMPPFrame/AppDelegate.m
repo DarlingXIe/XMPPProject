@@ -16,8 +16,8 @@
 //dalinxiedemacbook-air.local
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    [[DLXMPPManager sharedManager] loginWithJID:[XMPPJID jidWithUser:@"chenyan" domain:@"dalinxiedemacbook-air.local" resource:@"iOS"] password:@"123"];
-    [[DLXMPPManager sharedManager] RegisterWithJID:[XMPPJID jidWithUser:@"dalinXie" domain:@"dalinxiedemacbook-air.local" resource:@"iOS"] password:@"12345"];
+    [[DLXMPPManager sharedManager] loginWithJID:[XMPPJID jidWithUser:@"chenyan" domain:@"dalinxiedemacbook-air.local" resource:@"iOS"] password:@"123"];
+    //[[DLXMPPManager sharedManager] RegisterWithJID:[XMPPJID jidWithUser:@"dalinXie" domain:@"dalinxiedemacbook-air.local" resource:@"iOS"] password:@"12345"];
     
     
     return YES;
